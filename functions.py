@@ -12,7 +12,7 @@ def plot_history(history):
     plt.show()
 
 
-def plot_predict(y_test, pred)
+def plot_predict(y_test, pred):
     fig, ax = plt.subplots(3,1, figsize=(20,10))
     ax[0].plot(y_test.squeeze(), '.b', markersize=2)
     ax[0].legend(['true'])
