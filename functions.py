@@ -12,6 +12,18 @@ def plot_history(history):
     plt.show()
 
 
+def plot_predict(y_test, pred)
+    fig, ax = plt.subplots(3,1, figsize=(20,10))
+    ax[0].plot(y_test.squeeze(), '.b', markersize=2)
+    ax[0].legend(['true'])
+    ax[1].set_ylim(bottom=0, top=1)
+    ax[1].plot(pred.squeeze(), '.r', markersize=2)
+    ax[1].legend(['pred'])
+    ax[2].plot(y_test.squeeze(), '.b', markersize=2)
+    ax[2].plot(pred.squeeze(), '.r', markersize=2)
+    plt.show()
+
+    
 def add_korr_str(x):         # внесение случайных отклонений ПОСТРОЧНО
     korrs = ((-0.1, 0.1), (-1.5, 1.5), (-1, 1), (-50, 50), (-20, 20))
     x = list(np.transpose(x))                       
