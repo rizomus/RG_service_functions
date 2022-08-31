@@ -35,6 +35,20 @@ def add_korr_str(x):         # внесение случайных отклон�
     return x
 
 
+def regr_warm_fit(x_train, y_train):
+    regr = RandomForestRegressor(1, criterion='squared_error', verbose=0, n_jobs=2, warm_start=True)
+    y = y_train.squeeze()
+
+    for i in range(100):
+        x = add_korr_str(x_train)
+        regr.fit(x, y)
+        regr.n_estimators += 1
+
+        print(i+1)
+        clear_output(wait=True)
+    return regr
+
+
 def get_score(pred, y):
     SS_res =  np.square(y - pred).sum()
     SS_tot = np.square(y - y.mean()).sum()
