@@ -14,9 +14,11 @@ def plot_history(history):
 
 def plot_predict(y_test, pred):
     fig, ax = plt.subplots(3,1, figsize=(20,10))
+    ax[0].set_ylim(bottom=0, top=1)
+    ax[1].set_ylim(bottom=0, top=1)
+    ax[2].set_ylim(bottom=0, top=1)
     ax[0].plot(y_test.squeeze(), '.b', markersize=2)
     ax[0].legend(['true'])
-    ax[1].set_ylim(bottom=0, top=1)
     ax[1].plot(pred.squeeze(), '.r', markersize=2)
     ax[1].legend(['pred'])
     ax[2].plot(y_test.squeeze(), '.b', markersize=2)
