@@ -100,3 +100,8 @@ def generate_y(y, n=100):
     y_ = [y for _ in range(n)]
     y = np.vstack([*y_])
     return y
+
+
+def get_only_indeces(x, ind):
+    a = [x[:,i] for i in ind]
+    return np.vstack([*a]).T
