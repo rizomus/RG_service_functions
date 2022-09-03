@@ -88,3 +88,15 @@ def determination_loss(y_true, y_pred):                 # на основе RF s
     SS_res =  K.sum(K.square(y_true-y_pred))
     SS_tot = K.sum(K.square(y_true - K.mean(y_true)))
     return K.abs((1 - SS_res/(SS_tot + K.epsilon())) - 1)
+
+
+def generate_x(x, n=100):
+    x_ = [add_korr_str(x) for _ in range(n)]
+    x = np.vstack([*x_])
+    return x
+
+
+def generate_y(y, n=100):
+    y_ = [y for _ in range(n)]
+    y = np.vstack([*y_])
+    return y
