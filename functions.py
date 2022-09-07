@@ -105,3 +105,16 @@ def generate_y(y, n=100):
 def get_only_indeces(x, ind):
     a = [x[:,i] for i in ind]
     return np.vstack([*a]).T
+
+
+def getXYseq(x, y, window=64, step=8): 
+    i = 0
+    X = []
+    Y = []
+    while i + window <= len(x):
+        X.append(x[i: i+window])
+        Y.append(y[i: i+window])
+        i += step
+    X = np.array(X)
+    Y = np.array(Y)
+    return X, Y
