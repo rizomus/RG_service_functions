@@ -59,6 +59,8 @@ def get_score(pred, y):
 
 
 def get_err(pred, y):        # подсчёт ошибки на чистых тестовых данных
+    y = y.squeeze()
+    pred = pred.squeeze()
     mae = MAE(y, pred).numpy().mean()            # mean absolute erro
     proc = MAPE(y, pred).numpy().mean()         # mean absolute percentage error
     score = get_score(pred, y)
