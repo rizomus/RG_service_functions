@@ -66,17 +66,21 @@ def get_err(pred, y):        # подсчёт ошибки на чистых т�
     score = get_score(pred, y)
     print(f'MAE: {mae:.2f}   {proc:.1f} %    score: {score:.2f}')
 
-
+    
+def show_result(model, x_test, y_true):
+    pred = model.predict(x_test)
+    get_err(pred, y_true)
+    plot_predict(y_true, pred)
+    
+    
 def normalization(x):
     x_max = []                       
     x_min = []
-
     for i in range(x.shape[1]):
         x_max.append(x[:,i].max())
         x_min.append(x[:,i].min())
     x_max = np.array(x_max)
     x_min = np.array(x_min)
-    
     return (x - x_min) / (x_max - x_min)
 
 
