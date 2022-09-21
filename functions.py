@@ -109,13 +109,16 @@ def get_only_indeces(x, ind):
     return np.vstack([*a]).T
 
 
-def getXYseq(x, y, window=64, step=8, y_seq=False): 
+def getXYseq(x, y, window=64, step=8, y_seq=False, y_prob=False, threshold=0.1): 
     i = 0
     X = []
     Y = []
     while i + window <= len(x):
         X.append(x[i: i+window])
-        if y_seq:
+        if y_prob:
+            prob = (y[i: i+window] >= threshold).sum() / window
+            Y.append(prob)
+        elif y_seq:
             Y.append(y[i: i+window])
         else:
             Y.append(y[i+window-1])
