@@ -137,7 +137,7 @@ def getXYseq(x, y, window=64, step=8, y_seq=False, y_prob=False, threshold=0.1):
         elif y_seq:
             Y.append(y[i: i+window])
         else:
-            Y.append(y[i+window-1])
+            Y.append(y[i+(window//2)])
         i += step
     X = np.array(X)
     Y = np.array(Y)
