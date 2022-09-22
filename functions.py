@@ -2,6 +2,7 @@ from tensorflow.keras.losses import MAE, MSE
 from tensorflow.keras.losses import mean_absolute_percentage_error as MAPE
 import tensorflow.keras.backend as K
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
 from IPython.display import clear_output
 import numpy as np
@@ -73,7 +74,16 @@ def show_result(model, x_test, y_true):
     plot_predict(y_true, pred)
     
     
-def normalization(x):
+def normalization(x, type=1):
+    '''
+    type=0 - StandardScaler
+    type=1 - normalize to [0,1]
+    type=2 - normalize to [-1,1]
+    '''
+    if type == 0:
+        scaler = StandardScaler()
+        return scaler.fit_transform(x)  
+       
     x_max = []                       
     x_min = []
     for i in range(x.shape[1]):
@@ -81,8 +91,10 @@ def normalization(x):
         x_min.append(x[:,i].min())
     x_max = np.array(x_max)
     x_min = np.array(x_min)
-    return (x - x_min) / (x_max - x_min)
-
+    if type == 1:
+        return (x - x_min) / (x_max - x_min)
+    if type == 2:
+        return (x - x_min) / (x_max - x_min) * 2 - 1
 
 def coeff_determination(y_true, y_pred):            # RF score (1 - идеально, 0 - плохо, отрицательные значения - совсем плохо)
     SS_res =  K.sum(K.square(y_true-y_pred))
