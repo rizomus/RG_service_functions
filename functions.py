@@ -142,3 +142,15 @@ def getXYseq(x, y, window=64, step=8, y_seq=False, y_prob=False, threshold=0.1):
     X = np.array(X)
     Y = np.array(Y)
     return X, Y
+
+
+def getXmean(x, window=10, step=1): 
+    i = 0
+    X = []
+    while i + window <= len(x):
+        X.append(x[i: i+window].mean(axis=0))
+        i += step
+    begin = [X[0] for _ in range(window//2)]
+    end = [X[-1] for _ in range(window//2 - 1)]
+    X = begin + X + end
+    return np.array(X)
